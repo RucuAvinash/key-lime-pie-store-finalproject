@@ -1,16 +1,13 @@
 # mkdocs.yml
 # Configuration file for MkDocs (Automated project documentation generator)
 
-# TODO: Change denisecase to your GitHub username (use CTRL F to find all instances)
-# TODO: Change pro-analytics-02-starter to your repository name (use CTRL F to find all instances)
-# TODO: Update site_description
-# TODO: Update site_author
+
 
 site_name: Professional Analytics Project
-site_url: https://denisecase.github.io/pro-analytics-02-starter/
-repo_url: https://github.com/denisecase/pro-analytics-02-starter
+site_url: https://github.com/RucuAvinash?tab=repositories
+repo_url: https://github.com/RucuAvinash/key-lime-pie-store-finalproject
 site_description: Professional Python project demonstrating industry best practices
-site_author: Denise Case
+site_author: Rucmanidevi Sethu
 docs_dir: docs
 site_dir: site
 

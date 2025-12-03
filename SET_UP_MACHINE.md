@@ -132,3 +132,4 @@ When all of these are true, your setup is complete:
 
 Congratulations — your professional analytics environment is ready to go!
 (Honestly, getting set up correctly IS the hardest part about using Python for analytics - time to take a break and celebrate!)
+
