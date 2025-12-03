@@ -1,0 +1,4 @@
+2025-11-13 12:19:INFO    AT utils_logger.py:105: Logging to file: C:\Users\edaci\Documents\pro-analytics-02-starter\project.log
+2025-11-13 12:19:INFO    AT demo_module_viz.py:44: Loaded Penguins dataset successfully.
+2025-11-13 12:19:INFO    AT demo_module_viz.py:52: Displaying chart... Close the window to exit.
+2025-11-13 12:19:INFO    AT demo_module_viz.py:54: Chart closed successfully.
