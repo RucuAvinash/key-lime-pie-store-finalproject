@@ -1,5 +1,6 @@
 
 Author: Rucmanidevi Sethu
+
 Key Lime Pie Store – Final Project
 A modular, reproducible data analytics pipeline for simulating sales operations at a fictional Key Lime Pie store. This project demonstrates best practices in ETL, schema normalization, and business intelligence workflows using Python, SQLite, and pandas.
 
