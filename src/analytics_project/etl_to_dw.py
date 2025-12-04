@@ -111,6 +111,7 @@ def norm_sales(df: pd.DataFrame) -> pd.DataFrame:
             "customersegmentid": "customer_segmentid",
             "productid": "product_id",
             "date": "sale_date",
+            "region": "region",
             "unitssold": "units_sold",
             "revenue": "sale_amount",
             "profitmargin": "profit_margin",
@@ -123,6 +124,7 @@ def norm_sales(df: pd.DataFrame) -> pd.DataFrame:
         "product_id",
         "units_sold",
         "sale_date",
+        "region",
         "sale_amount",
         "profit_margin",
     ]
@@ -253,6 +255,7 @@ def create_schema(cursor: sqlite3.Cursor) -> None:
             units_sold REAL,
             sale_amount REAL NOT NULL,
             sale_date TEXT,
+            region TEXT,
             profit_margin REAL,
             FOREIGN KEY (customer_segmentid) REFERENCES customer (customer_segmentid),
             FOREIGN KEY (product_id) REFERENCES product (product_id)
