@@ -70,6 +70,8 @@ def norm_customers(df: pd.DataFrame) -> pd.DataFrame:
         df["customer_segmentid"]
         .astype(str)  # ensure string type
         .str.strip()  # remove leading trainling spaces
+        .str.extract(r"[Cc](\d+)", expand=False)  # captures digits after "C" or "c"
+        .astype("Int64")
     )
 
     df = df.dropna(subset=["customer_segmentid"])
@@ -89,9 +91,13 @@ def norm_products(df: pd.DataFrame) -> pd.DataFrame:
     )
     df = df[["product_id", "product_variant"]].copy()
     df["product_id"] = (
-        df["product_id"].astype(str).str.strip()
-    )  # Ensure product id is a clean string
-    df = df.replace({"product_id": {"": pd.NA}}).dropna(subset=["product_id"])
+        df["product_id"]
+        .astype(str)
+        .str.strip()
+        .str.extract(r"[Pp](\d+)", expand=False)  # captures digits after "P" or "p"
+        .astype("Int64")
+    )  # Drop missing IDs and dedupe
+    df = df.dropna(subset=["product_id"])
     return drop_dupes(df, "product_id")
 
 
@@ -126,29 +132,38 @@ def norm_sales(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df[required].copy()
 
-    # Normalize IDs but keep "C" as strings
+    # Convert IDs to integers by stripping prefixes
     df["customer_segmentid"] = (
         df["customer_segmentid"]
-        .astype(str)  # ensure string type
-        .str.strip()  # remove leading/trailing spaces
+        .astype(str)
+        .str.strip()
+        .str.extract(r"[Cc](\d+)", expand=False)
+        .astype("Int64")
     )
-    # Drop blak or missing values
-    df = df.replace({"customer_segmentid": {"": pd.NA}, "product_id": {"": pd.NA}}).dropna(
-        subset=["customer_segmentid", "product_id"]
+
+    df["product_id"] = (
+        df["product_id"]
+        .astype(str)
+        .str.strip()
+        .str.extract(r"[Pp](\d+)", expand=False)
+        .astype("Int64")
     )
-    df["product_id"] = df["product_id"].astype(str).str.strip()
+
+    # Convert sales_id to integer
     df["sales_id"] = pd.to_numeric(df["sales_id"], errors="coerce").astype("Int64")
 
+    # Convert measures to numeric
     df["units_sold"] = pd.to_numeric(df["units_sold"], errors="coerce")
     df["sale_amount"] = pd.to_numeric(df["sale_amount"], errors="coerce")
     df["profit_margin"] = pd.to_numeric(df["profit_margin"], errors="coerce")
 
+    # Drop rows missing critical values
     df = df.dropna(subset=["customer_segmentid", "product_id", "sale_amount"])
 
+    # Reassign sales_id if duplicates or nulls
     if df["sales_id"].isna().any() or df["sales_id"].duplicated().any():
         df = df.reset_index(drop=True)
-        df["sales_id"] = (df.index + 1).astype("Int64")
-
+    df["sales_id"] = (df.index + 1).astype("Int64")
     return df
 
 
@@ -212,7 +227,7 @@ def create_schema(cursor: sqlite3.Cursor) -> None:
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS customer (
-            customer_segmentid TEXT PRIMARY KEY,
+            customer_segmentid INTEGER PRIMARY KEY,
             customer_segment TEXT
         )
         """
@@ -222,7 +237,7 @@ def create_schema(cursor: sqlite3.Cursor) -> None:
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS product (
-            product_id TEXT PRIMARY KEY,
+            product_id INTEGER PRIMARY KEY,
             product_variant TEXT
         )
         """
@@ -233,8 +248,8 @@ def create_schema(cursor: sqlite3.Cursor) -> None:
         """
         CREATE TABLE IF NOT EXISTS sales (
             sales_id INTEGER PRIMARY KEY,
-            customer_segmentid TEXT NOT NULL,
-            product_id TEXT NOT NULL,
+            customer_segmentid INTEGER NOT NULL,
+            product_id INTEGER NOT NULL,
             units_sold REAL,
             sale_amount REAL NOT NULL,
             sale_date TEXT,
