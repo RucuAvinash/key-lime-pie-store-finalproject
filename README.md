@@ -3,7 +3,7 @@ Author: Rucmanidevi Sethu
 Key Lime Pie Store – Final Project
 A modular, reproducible data analytics pipeline for simulating sales operations at a fictional Key Lime Pie store. This project demonstrates best practices in ETL, schema normalization, and business intelligence workflows using Python, SQLite, and pandas.
 
- Project Overview
+ Project Overview:
 This repository contains a complete data pipeline and analytics framework for a mock retail store selling key lime pies and related products. It includes raw and cleaned datasets, a normalized SQLite database, and modular Python scripts for loading, transforming, and analyzing sales data.
 
 1. Business Goals:
