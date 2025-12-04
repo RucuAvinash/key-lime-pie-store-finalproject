@@ -1,170 +1,134 @@
-# Pro Analytics 02 Python Starter Repository
 
-> Use this repo to start a professional Python project.
+Author: Rucmanidevi Sethu
+Key Lime Pie Store – Final Project
+A modular, reproducible data analytics pipeline for simulating sales operations at a fictional Key Lime Pie store. This project demonstrates best practices in ETL, schema normalization, and business intelligence workflows using Python, SQLite, and pandas.
 
-- Additional information: <https://github.com/denisecase/pro-analytics-02>
-- Project organization: [STRUCTURE](./STRUCTURE.md)
-- Build professional skills:
-  - **Environment Management**: Every project in isolation
-  - **Code Quality**: Automated checks for fewer bugs
-  - **Documentation**: Use modern project documentation tools
-  - **Testing**: Prove your code works
-  - **Version Control**: Collaborate professionally
+📦 Project Overview
+This repository contains a complete data pipeline and analytics framework for a mock retail store selling key lime pies and related products. It includes raw and cleaned datasets, a normalized SQLite database, and modular Python scripts for loading, transforming, and analyzing sales data.
 
----
+1. Business Goals:
+-- TO collect raw data and normalize data tinto a star schema
+-- Load them into database using Python scripts and analyzing the sales data for the store.
+-- Create visualization for the data processed and analyze the sales , profit margin , what went well, what can improve type of questions.
 
-## WORKFLOW 1. Set Up Your Machine
+2. Data Source:
+The Data is synthetic and added more data manually to have duplicates and missing values. This raw data was saved in the form of CSV files - (customers.csv, sales_fact.csv, key_lime_products.csv)
+Later they were processed by running data prep and data scrubber python queries and stored in the processed folder as cleaned versions.
+Finally, the data was loaded to the FInal SQLite database - (keylime_sales.db) with normalized schema.
 
-Proper setup is critical.
-Complete each step in the following guide and verify carefully.
+3. Tools used:
+   --Python - data cleaning, transformation and  for ETL process.
+   --SQLite - Star schema database for analysis
+   --Jupyter notebooks- For analysis and visualization
+   --VS Code - Developement environment
+   --Ruff - Style enforcement
+   -- Power BI - Represent data
+  4. Workflow & Logic
+- Raw Ingestion
+Load CSVs from data/raw/ into pandas.
+- Cleaning & Normalization
+- Remove nulls, duplicates, and trailing spaces
+- Align foreign keys and column types
+- Normalize into dimension and fact tables
+- Schema Design
+- Star schema with sales_fact_clean.csv as the central fact table
+- Dimensions: customers_clean.csv, key_lime_products_clean.csv
+- Database Loading
+- Write cleaned tables to keylime_sales.db
+- Enforce FK constraints and indexing
+- Analysis
+- Use notebooks to explore sales trends, customer segments, and product performance
 
-- [SET UP MACHINE](./SET_UP_MACHINE.md)
+5. (Narrative + Visualizations)
+Key findings:
+Total Profit by Product
+![alt text](image.png)
+Profit margin by customer segment
+![alt text](image-1.png)
+Sum of sales by year
+![alt text](image-2.png)
+Sum of sale by month and customer segment
+![alt text](image-3.png)
+Avg Sale by Product Variant
+![alt text](image-4.png)
 
----
+Visualizations include:
+- I used a Stacked area chart to find the Total Profit by Product- and found that the Class Pie is the Top seller.
+- Pie chart of product category distribution- based on this visual Students are the Top contributors to the profit of key lime pie store, next comes Parties and Families who contribute most.
+- Heat map gives information on Total sales by Month and  customer segment and see that classic pie has been most commonly purchased all through the year except for March, May, August and November as other products had increased sales on those months.
+- Funnel chart of Avg sales by product helps to compare the sales by product and understand the highest and the lowest points.
 
-## WORKFLOW 2. Set Up Your Project
+6. 📈 Suggested Business Action
+- Launch targeted summer promotions for top-selling products
+- Introduce loyalty rewards for repeat buyers(Students, Party orders and Families)
+- Bundle Pie with nuts products with other products to increase average order value
+- Expand inventory in the southeast region
 
-After verifying your machine is set up, set up a new Python project by copying this template.
-Complete each step in the following guide.
+7. Challenges
+- Schema mismatches between raw and cleaned data
+- Inconsistent foreign key formats (string vs integer)
+- Missing values and duplicate customer records
+- Ensuring reproducibility across environments
 
-- [SET UP PROJECT](./SET_UP_PROJECT.md)
+8. Ethical Considerations
+- All data is synthetic; no real customer information used
+- Pipeline design emphasizes transparency and traceability
+- Teaching modules encourage responsible data handling
+- Future extensions should include bias checks in customer segmentation
 
-It includes the critical commands to set up your local environment (and activate it):
 
-```shell
-uv python pin 3.12
-uv venv
-uv sync --extra dev --extra docs --upgrade
-uv run pre-commit install
-uv run python --version
-```
 
-**Windows (PowerShell):**
 
-```shell
-.\.venv\Scripts\activate
-```
+🗂 Directory Structure
+KEY-LIME-PIE-STORE-FINALPROJECT/
+├── .github/              # GitHub workflows and issue templates
+├── .ruff_cache/          # Ruff linter cache
+├── .venv/                # Python virtual environment
+├── .vscode/              # VS Code settings
+├── analytics_project/    # Main project scripts and modules
+├── data/
+│   ├── raw/              # Unprocessed CSVs: customers, products, sales
+│   ├── processed/        # Cleaned CSVs for loading into DB
+│   └── dw/               # SQLite DB: keylime_sales.db
+├── docs/                 # Project documentation
+├── notebooks/            # Jupyter notebooks for exploration and teaching
+├── src/                  # ETL and normalization logic
+└── README.md             # Project overview
 
-**macOS / Linux / WSL:**
 
-```shell
+
+🧪 Data Pipeline
+- Raw Inputs:
+- customers.csv
+- key_lime_products.csv
+- sales_fact.csv
+- Cleaned Outputs:
+- customers_clean.csv
+- key_lime_products_clean.csv
+- sales_fact_clean.csv
+- Database:
+- keylime_sales.db with normalized star schema
+
+🛠 Technologies Used
+- Python (pandas, sqlite3, logging)
+- SQLite (star schema design)
+- Jupyter Notebooks
+- VS Code + Ruff + Pre-commit hooks
+
+🚀 How to Run
+- Clone the repo and activate the virtual environment:
+git clone https://github.com/your-username/keylime-store.git
+cd KEY-LIME-PIE-STORE-FINALPROJECT
 source .venv/bin/activate
-```
+- Run the ETL pipeline:
+python src/etl_pipeline.py
+- Explore the database:
+- Use notebooks/ for guided analysis
+- Connect to data/dw/keylime_sales.db using DB Browser or Python
 
----
-
-## WORKFLOW 3. Daily Workflow
-
-Please ensure that the prior steps have been verified before continuing.
-When working on a project, we open just that project in VS Code.
-
-### 3.1 Git Pull from GitHub
-
-Always start with `git pull` to check for any changes made to the GitHub repo.
-
-```shell
-git pull
-```
-
-### 3.2 Run Checks as You Work
-
-This mirrors real work where we typically:
-
-1. Update dependencies (for security and compatibility).
-2. Clean unused cached packages to free space.
-3. Use `git add .` to stage all changes.
-4. Run ruff and fix minor issues.
-5. Update pre-commit periodically.
-6. Run pre-commit quality checks on all code files (**twice if needed**, the first pass may fix things).
-7. Run tests.
-
-In VS Code, open your repository, then open a terminal (Terminal / New Terminal) and run the following commands one at a time to check the code.
-
-```shell
-uv sync --extra dev --extra docs --upgrade
-uv cache clean
-git add .
-uvx ruff check --fix
-uvx pre-commit autoupdate
-uv run pre-commit run --all-files
-git add .
-uv run pytest
-```
-
-NOTE: The second `git add .` ensures any automatic fixes made by Ruff or pre-commit are included before testing or committing.
-
-<details>
-<summary>Click to see a note on best practices</summary>
-
-`uvx` runs the latest version of a tool in an isolated cache, outside the virtual environment.
-This keeps the project light and simple, but behavior can change when the tool updates.
-For fully reproducible results, or when you need to use the local `.venv`, use `uv run` instead.
-
-</details>
-
-### 3.3 Build Project Documentation
-
-Make sure you have current doc dependencies, then build your docs, fix any errors, and serve them locally to test.
-
-```shell
-uv run mkdocs build --strict
-uv run mkdocs serve
-```
-
-- After running the serve command, the local URL of the docs will be provided. To open the site, press **CTRL and click** the provided link (at the same time) to view the documentation. On a Mac, use **CMD and click**.
-- Press **CTRL c** (at the same time) to stop the hosting process.
-
-### 3.4 Execute
-
-This project includes demo code.
-Run the demo Python modules to confirm everything is working.
-
-In VS Code terminal, run:
-
-```shell
-uv run python -m analytics_project.demo_module_basics
-uv run python -m analytics_project.demo_module_languages
-uv run python -m analytics_project.demo_module_stats
-uv run python -m analytics_project.demo_module_viz
-```
-
-You should see:
-
-- Log messages in the terminal
-- Greetings in several languages
-- Simple statistics
-- A chart window open (close the chart window to continue).
-
-If this works, your project is ready! If not, check:
-
-- Are you in the right folder? (All terminal commands are to be run from the root project folder.)
-- Did you run the full `uv sync --extra dev --extra docs --upgrade` command?
-- Are there any error messages? (ask for help with the exact error)
-
----
-
-### 3.5 Git add-commit-push to GitHub
-
-Anytime we make working changes to code is a good time to git add-commit-push to GitHub.
-
-1. Stage your changes with git add.
-2. Commit your changes with a useful message in quotes.
-3. Push your work to GitHub.
-
-```shell
-git add .
-git commit -m "describe your change in quotes"
-git push -u origin main
-```
-
-This will trigger the GitHub Actions workflow and publish your documentation via GitHub Pages.
-
-### 3.6 Modify and Debug
-
-With a working version safe in GitHub, start making changes to the code.
-
-Before starting a new session, remember to do a `git pull` and keep your tools updated.
-
-Each time forward progress is made, remember to git add-commit-push.
-
-
+📊 Teaching & Portfolio Use
+This project is designed to be modular and teachable:
+- Clean separation of raw vs processed data
+- Reproducible pipeline with logging and docstrings
+- Schema alignment and normalization logic for BI
+- Jupyter notebooks for walkthroughs and demos
