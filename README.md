@@ -3,7 +3,7 @@ Author: Rucmanidevi Sethu
 Key Lime Pie Store – Final Project
 A modular, reproducible data analytics pipeline for simulating sales operations at a fictional Key Lime Pie store. This project demonstrates best practices in ETL, schema normalization, and business intelligence workflows using Python, SQLite, and pandas.
 
-📦 Project Overview
+ Project Overview
 This repository contains a complete data pipeline and analytics framework for a mock retail store selling key lime pies and related products. It includes raw and cleaned datasets, a normalized SQLite database, and modular Python scripts for loading, transforming, and analyzing sales data.
 
 1. Business Goals:
@@ -58,7 +58,7 @@ Visualizations include:
 - Heat map gives information on Total sales by Month and  customer segment and see that classic pie has been most commonly purchased all through the year except for March, May, August and November as other products had increased sales on those months.
 - Funnel chart of Avg sales by product helps to compare the sales by product and understand the highest and the lowest points.
 
-6. 📈 Suggested Business Action
+6. Suggested Business Action
 - Launch targeted summer promotions for top-selling products
 - Introduce loyalty rewards for repeat buyers(Students, Party orders and Families)
 - Bundle Pie with nuts products with other products to increase average order value
@@ -97,7 +97,7 @@ KEY-LIME-PIE-STORE-FINALPROJECT/
 
 
 
-🧪 Data Pipeline
+Data Pipeline
 - Raw Inputs:
 - customers.csv
 - key_lime_products.csv
@@ -109,13 +109,13 @@ KEY-LIME-PIE-STORE-FINALPROJECT/
 - Database:
 - keylime_sales.db with normalized star schema
 
-🛠 Technologies Used
+ Technologies Used
 - Python (pandas, sqlite3, logging)
 - SQLite (star schema design)
 - Jupyter Notebooks
 - VS Code + Ruff + Pre-commit hooks
 
-🚀 How to Run
+How to Run
 - Clone the repo and activate the virtual environment:
 git clone https://github.com/your-username/keylime-store.git
 cd KEY-LIME-PIE-STORE-FINALPROJECT
@@ -126,7 +126,7 @@ python src/etl_pipeline.py
 - Use notebooks/ for guided analysis
 - Connect to data/dw/keylime_sales.db using DB Browser or Python
 
-📊 Teaching & Portfolio Use
+Teaching & Portfolio Use
 This project is designed to be modular and teachable:
 - Clean separation of raw vs processed data
 - Reproducible pipeline with logging and docstrings
